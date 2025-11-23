@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：14:01:12" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
+      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：14:02:41" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
     </span>
 
   
@@ -202,7 +202,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="BG"><a href="#BG" class="headerlink" title="BG"></a>BG</h1><p>最近公司要对老旧的代码进行优化，因为请求-回应的延迟太大实在是看不下去了～～绝对不是因为甩锅没有甩过别的团队～～。经过一番分析，发现有个串行的数据流从业务角度可以优化为并行+串行的模式。<br>并行场景下最简单的方案就是对可能存在多线程(协程)竞争的资源加锁。但是加锁也有加锁的弊端。首先就是</p>
+          <h1 id="BG"><a href="#BG" class="headerlink" title="BG"></a>BG</h1><p>最近公司要对老旧的代码进行优化，因为请求-回应的延迟太大实在是看不下去了<del>绝对不是因为甩锅没有甩过别的团队</del>。经过一番分析，发现有个串行的数据流从业务角度可以优化为并行+串行的模式。<br>并行场景下最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长，互斥锁</p>
 
       
     </div>
