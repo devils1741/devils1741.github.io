@@ -192,7 +192,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：16:09:34" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
+      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：16:10:54" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
     </span>
 
   
@@ -214,13 +214,13 @@
 <li>仅使用原子读和原子写操作</li>
 </ol>
 <p>本文提出的安全内存回收方法的核心思想是：为每个参与线程关联少量(一个小常数K，通常不超过3)共享指针，称为hazard pointer(危险指针)。<br>危险指针的值要么为null，要么指向可能被线程访问的节点。线程可以通过这些指针直接访问节点，不需要再验证这些节点的有效性。每个危险指针只能被所属线程写入，但可以被所有线程读取.</p>
-<p>伪代码如下:</p>
+<p>伪代码如下:<br>::: tabset</p>
+<p>::: tab C++</p>
 <pre class="line-numbers language-language-cpp"><code class="language-language-cpp">#include <iostream>
 int main() {
-    std::cout << "Hello Hexo NexT!" << std::endl;
+    std::cout << "Hello C++!" << std::endl;
     return 0;
 }
-
 
 ### Q&A
 Q: 什么是无等待?
@@ -237,7 +237,7 @@ Q: 什么是争用敏感性？
 A: 随着同时运行的线程数 T 增加，算法的性能下降程度。跟时间复杂度一样，有常数，对数，线性和指数。一般线性增长是可以接受的，指数级别在高并发场景下无法接受。
    一个更加学术的描述是：算法的操作开销随并发线程数T增大而增长的幅度。
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
