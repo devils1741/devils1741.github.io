@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：14:08:25" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
+      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：14:18:19" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
     </span>
 
   
@@ -202,7 +202,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="BG"><a href="#BG" class="headerlink" title="BG"></a>BG</h1><p>最近公司要对老旧的代码进行优化，因为某些请求-回应的延迟太大实在是看不下去了<del>(不是因为甩锅没有甩过别的团队)</del>。经过分析，发现有个串行的数据流从业务角度可以优化为并行+串行的模式。 <br><br>并行场景下最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长,线程阻塞的情况会比较严重，延迟会比较大。通过查阅相关资料得知有一些无锁编程技术可以有效<br>避免互斥锁的缺陷。经过几次三番与公司架子师的battle，最后选择hazard pointer作为解决方案。</p>
+          <h1 id="BG"><a href="#BG" class="headerlink" title="BG"></a>BG</h1><p>之前公司要对老旧的代码进行优化，因为某些请求-回应的延迟太大实在是看不下去了<del>(不是因为甩锅没有甩过别的团队)</del>。经过分析，发现部分串行的数据流从业务角度可以优化为并行+串行的模式。<br>并行场景下保护数据安全最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长,线程阻塞的情况会比较严重，延迟比较大。通过查阅相关资料得知有一些无锁编程技术可以有效<br>避免互斥锁的缺陷。经过几次三番与公司架子师的battle，最后选择hazard pointer作为解决方案。<br>鉴于网络上的资料良莠不齐，AI的回答又真假难辨，不得不通过最原始的技术论文完成代码实现。</p>
+<h1 id="PAPER"><a href="#PAPER" class="headerlink" title="PAPER"></a>PAPER</h1><p>原文下载链接: <a href = "https://web.archive.org/web/20170809000401id_/http://researchweb.watson.ibm.com/people/m/michael/podc-2002.pdf" download>google scholar</a><br>备份: <a href="downloads/Safe%20Memory%20Reclamation%20for%20Dynamic%20Lock-Free%20Objects%20Using%20Atomic%20Reads%20and%20Writes.pdf">Safe Memory Reclamation for Dynamic Lock-Free Objects Using Atomic Reads and Writes.pdf</a></p>
 
       
     </div>
