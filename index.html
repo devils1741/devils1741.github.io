@@ -189,7 +189,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：15:09:04" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
+      <time title="创建时间：2025-11-23 13:47:06 / 修改时间：15:11:12" itemprop="dateCreated datePublished" datetime="2025-11-23T13:47:06+08:00">2025-11-23</time>
     </span>
 
   
@@ -203,7 +203,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="BG"><a href="#BG" class="headerlink" title="BG"></a>BG</h1><p>之前公司要对老旧的代码进行优化，因为某些请求-回应的延迟太大实在是看不下去了<del>(不是因为甩锅没有甩过别的团队)</del>。经过分析，发现部分串行的数据流从业务角度可以优化为并行+串行的模式。<br>并行场景下保护数据安全最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长,线程阻塞的情况会比较严重，延迟比较大。通过查阅相关资料得知有一些无锁编程技术可以有效<br>避免互斥锁的缺陷。经过几次三番与公司架子师的battle，最后选择hazard pointer作为解决方案。<br>鉴于网络上的资料良莠不齐，AI的回答又似是而非，不得不根据最原始的技术论文完成代码实现。</p>
-<h1 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h1><p>原文下载链接(需要科学上网): <a href = "https://web.archive.org/web/20170809000401id_/http://researchweb.watson.ibm.com/people/m/michael/podc-2002.pdf" download>google scholar</a><br>备份: <a href="../downloads/hazard_pointer.pdf">hazard_pointer.pdf</a></p>
+<h1 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h1><p>原文下载链接(需要科学上网): <a href = "https://web.archive.org/web/20170809000401id_/http://researchweb.watson.ibm.com/people/m/michael/podc-2002.pdf" download>google scholar</a><br>备份: <a href="hazard_pointer.pdf">hazard_pointer.pdf</a></p>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>文章提出了一个可以用于动态锁自由对象(dynamic lock-free objects)、允许任意内存重用、并且不需要特殊操作系统或硬件支持的锁自由内存管理方法。<br>这种方法具有以下特性:</p>
 <ol>
 <li>无等待(wait-free)</li>
