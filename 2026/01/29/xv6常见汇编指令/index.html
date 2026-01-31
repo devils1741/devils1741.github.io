@@ -1,23 +1,23 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>xv6常见汇编指令 | Hexo</title><meta name="author" content="Jensen"><meta name="copyright" content="Jensen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="addi  1addi rd, rs1, imm 加法操作，rd &#x3D; rs1+immrd：目标寄存器，存放结果rs1：源寄存器，参与加法运算imm：立即数（12 位有符号整数，-2048 ~ 2047）说人话就是指令里直接写死的常数 1addi sp,sp,-48   &#x2F;&#x2F; 栈顶向下移动48个字节  sd  1sd rs2, offset(rs1) 把寄存器rs2的数据存储到内存中 s">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>risc-v常见汇编指令 | Hexo</title><meta name="author" content="Jensen"><meta name="copyright" content="Jensen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="addi  addi rd, rs1, imm 加法操作，rd &#x3D; rs1+immrd：目标寄存器，存放结果rs1：源寄存器，参与加法运算imm：立即数（12 位有符号整数，-2048 ~ 2047）说人话就是指令里直接写死的常数 addi sp,sp,-48   &#x2F;&#x2F; 栈顶向下移动48个字节  sd  sd rs2, offset(rs1) 把寄存器rs2的数据存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xv6常见汇编指令">
+<meta property="og:title" content="risc-v常见汇编指令">
 <meta property="og:url" content="https://devils1741.github.io/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="addi  1addi rd, rs1, imm 加法操作，rd &#x3D; rs1+immrd：目标寄存器，存放结果rs1：源寄存器，参与加法运算imm：立即数（12 位有符号整数，-2048 ~ 2047）说人话就是指令里直接写死的常数 1addi sp,sp,-48   &#x2F;&#x2F; 栈顶向下移动48个字节  sd  1sd rs2, offset(rs1) 把寄存器rs2的数据存储到内存中 s">
+<meta property="og:description" content="addi  addi rd, rs1, imm 加法操作，rd &#x3D; rs1+immrd：目标寄存器，存放结果rs1：源寄存器，参与加法运算imm：立即数（12 位有符号整数，-2048 ~ 2047）说人话就是指令里直接写死的常数 addi sp,sp,-48   &#x2F;&#x2F; 栈顶向下移动48个字节  sd  sd rs2, offset(rs1) 把寄存器rs2的数据存">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://devils1741.github.io/img/butterfly-icon.png">
 <meta property="article:published_time" content="2026-01-29T13:46:11.000Z">
-<meta property="article:modified_time" content="2026-01-31T07:07:16.240Z">
+<meta property="article:modified_time" content="2026-01-31T07:37:01.972Z">
 <meta property="article:author" content="Jensen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://devils1741.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "xv6常见汇编指令",
+  "headline": "risc-v常见汇编指令",
   "url": "https://devils1741.github.io/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/",
   "image": "https://devils1741.github.io/img/butterfly-icon.png",
   "datePublished": "2026-01-29T13:46:11.000Z",
-  "dateModified": "2026-01-31T07:07:16.240Z",
+  "dateModified": "2026-01-31T07:37:01.972Z",
   "author": [
     {
       "@type": "Person",
@@ -120,7 +120,7 @@
   algolia: undefined,
   localSearch: undefined,
   translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
   copy: {
     success: '复制成功',
     error: '复制失败',
@@ -154,7 +154,7 @@
   },
   autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'xv6常见汇编指令',
+  title: 'risc-v常见汇编指令',
   isHighlightShrink: false,
   isToc: false,
   pageType: 'post'
@@ -163,46 +163,73 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="/css/prism.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">xv6常见汇编指令</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">xv6常见汇编指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-29T13:46:11.000Z" title="发表于 2026-01-29 21:46:11">2026-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-31T07:07:16.240Z" title="更新于 2026-01-31 15:07:16">2026-01-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><ol>
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">risc-v常见汇编指令</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">risc-v常见汇编指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-29T13:46:11.000Z" title="发表于 2026-01-29 21:46:11">2026-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-31T07:37:01.972Z" title="更新于 2026-01-31 15:37:01">2026-01-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><ol>
 <li>addi</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addi rd, rs1, imm</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">addi rd, rs1, imm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>加法操作，rd &#x3D; rs1+imm<br>rd：目标寄存器，存放结果<br>rs1：源寄存器，参与加法运算<br>imm：立即数（12 位有符号整数，-2048 ~ 2047）说人话就是指令里直接写死的常数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addi sp,sp,-48   // 栈顶向下移动48个字节</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">addi sp,sp,-48   &#x2F;&#x2F; 栈顶向下移动48个字节<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ol start="2">
 <li>sd</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sd rs2, offset(rs1)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">sd rs2, offset(rs1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>把寄存器rs2的数据存储到内存中</p>
 <p>sd：store double（存 8 字节整数到内存）<br>rs2：源寄存器，需要写入内存的值<br>rs1：基址寄存器，存储的目标地址基准，说人话就是栈顶<br>offset &#x3D; 偏移量（立即数，单位字节），偏移量需要字节对齐不然系统会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sd ra,40(sp) // 把寄存器ra的值存储到sp中。40代表偏移量。</span><br><span class="line"></span><br><span class="line">3. mv</span><br></pre></td></tr></table></figure>
-<p>mv rd, rs</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">把数据从rs复制搭配rd，只能操作寄存器</span><br><span class="line">注意这是个伪指令，实际上应该是</span><br></pre></td></tr></table></figure>
-<p>addi rd, rs, 0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mv = move（寄存器拷贝，伪指令）</span><br><span class="line">rd = 目标寄存器</span><br><span class="line">rs = 源寄存器</span><br><span class="line"></span><br><span class="line">4. auipc</span><br><span class="line">auipc rd, imm</span><br><span class="line">把 PC（当前指令地址）加上一个立即数左移12位，然后存到寄存器rd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>auipc s2, 0x1 &#x2F;&#x2F; 等价于s2 &#x3D; PC + 0x1000</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. li</span><br></pre></td></tr></table></figure>
-<p>li rd, imm</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">把立即数imm的值直接加载到寄存器 rd</span><br><span class="line">也是伪指令，等价于</span><br></pre></td></tr></table></figure>
-<p>&#x2F;&#x2F; 立即数小：-2048 ~ 2047<br>addi t0, x0, 10</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">或者</span><br></pre></td></tr></table></figure>
-<p>&#x2F;&#x2F; 立即数大：超过 12 位<br>lui t0, 0x12345       # 高 20 位<br>addi t0, t0, 0x678    # 低 12 位补上</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. bge</span><br></pre></td></tr></table></figure>
-<p>bge rs1, rs2, label</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bge(branch if greater or equal)</span><br><span class="line">如果 rs1 ≥ rs2则跳转到label</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>bge	a5,a0,c0 &lt;main+0x4e&gt;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. addiw</span><br></pre></td></tr></table></figure>
-<p>addiw rd, rs1, imm</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">把32位的寄存器值与12位立即相加，然后符号拓展到64位寄存器rd</span><br><span class="line">C语言实现：rd = (int64_t)((int32_t)rs1 + imm);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>addiw	s3,a0,-2。 &#x2F;&#x2F; 32位寄存器a0的值-2之后存储到64位寄存器s3中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8. slli</span><br></pre></td></tr></table></figure>
-<p>slli rd, rs1, shamt</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">把 rs1 的值逻辑左移 shamt 位，然后存入 rd。寄存器值左移固定位数，低位补0。常用于乘以2的幂或计算偏移地址</span><br><span class="line">C语言实现：rd = rs1 &lt;&lt; shamt;</span><br><span class="line"></span><br><span class="line">9. jal</span><br></pre></td></tr></table></figure>
-<p>jal rd, label</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jal = Jump And Link</span><br><span class="line">跳转到label地址,把下一条指令地址（PC+4）保存到 rd</span><br><span class="line">等价C语言实现</span><br></pre></td></tr></table></figure>
-<p>rd &#x3D; PC + 4;   &#x2F;&#x2F; 保存返回地址<br>PC &#x3D; label;    &#x2F;&#x2F; 跳转</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">10. ld</span><br></pre></td></tr></table></figure>
-<p>ld rd, offset(rs1)</p>
-<pre><code>Load Doubleword, 从内存读取8个字节（64位）到寄存器rd。内存地址 = rs1 + offset
-</code></pre>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://devils1741.github.io">Jensen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://devils1741.github.io/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/">https://devils1741.github.io/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://devils1741.github.io" target="_blank">Hexo</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/11/23/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-hazard-pointer%E5%8E%9F%E6%96%87%E9%98%85%E8%AF%BB%E4%BB%A5%E5%8F%8A%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="无锁编程技术:hazard pointer原文阅读以及代码实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">无锁编程技术:hazard pointer原文阅读以及代码实现</div></div><div class="info-2"><div class="info-item-1">BG之前公司要对老旧的代码进行优化，因为某些请求-回应的延迟太大实在是看不下去了(不是因为甩锅没有甩过别的团队)。经过分析，发现部分串行的数据流从业务角度可以优化为并行+串行的模式。并行场景下保护数据安全最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长,线程阻塞的情况会比较严重，延迟比较大。通过查阅相关资料得知有一些无锁编程技术可以有效避免互斥锁的缺陷。经过几次三番与公司架子师的battle，最后选择hazard pointer作为解决方案。鉴于网络上的资料良莠不齐，AI的回答又似是而非，不得不根据最原始的技术论文完成代码实现。 Paper原文下载链接(需要科学上网): google scholar备份: hazard_pointer.pdf Introduction文章提出了一个可以用于动态锁自由对象(dynamic lock-free objects)、允许任意内存重用、并且不需要特殊操作系统或硬件支持的锁自由内存管理方法。这种方法具有以下特性:  无等待(wait-free) 对数级别的争用敏感性(contention...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jensen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" title="xv6常见汇编指令">xv6常见汇编指令</a><time datetime="2026-01-29T13:46:11.000Z" title="发表于 2026-01-29 21:46:11">2026-01-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/23/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-hazard-pointer%E5%8E%9F%E6%96%87%E9%98%85%E8%AF%BB%E4%BB%A5%E5%8F%8A%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="无锁编程技术:hazard pointer原文阅读以及代码实现">无锁编程技术:hazard pointer原文阅读以及代码实现</a><time datetime="2025-11-23T05:47:06.000Z" title="发表于 2025-11-23 13:47:06">2025-11-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/22/%E4%B8%BB%E9%A1%B5/" title="主页">主页</a><time datetime="2025-11-22T11:23:33.000Z" title="发表于 2025-11-22 19:23:33">2025-11-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jensen</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">sd ra,40(sp) &#x2F;&#x2F; 把寄存器ra的值存储到sp中。40代表偏移量。
+
+3. mv
+&#96;&#96;&#96;asm
+mv rd, rs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>把数据从rs复制搭配rd，只能操作寄存器<br>注意这是个伪指令，实际上应该是</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">addi rd, rs, 0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>mv &#x3D; move（寄存器拷贝，伪指令）<br>rd &#x3D; 目标寄存器<br>rs &#x3D; 源寄存器</p>
+<ol start="4">
+<li>auipc<br>auipc rd, imm<br>把 PC（当前指令地址）加上一个立即数左移12位，然后存到寄存器rd</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">auipc s2, 0x1 &#x2F;&#x2F; 等价于s2 &#x3D; PC + 0x1000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="5">
+<li>li</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">li rd, imm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>把立即数imm的值直接加载到寄存器 rd<br>也是伪指令，等价于</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">&#x2F;&#x2F; 立即数小：-2048 ~ 2047
+addi t0, x0, 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>或者</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 立即数大：超过 12 位
+lui t0, 0x12345       # 高 20 位
+addi t0, t0, 0x678    # 低 12 位补上<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ol start="6">
+<li>bge</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">bge rs1, rs2, label<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>bge(branch if greater or equal)<br>如果 rs1 ≥ rs2则跳转到label</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">bge	a5,a0,c0 &lt;main+0x4e&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="7">
+<li>addiw</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">addiw rd, rs1, imm<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>把32位的寄存器值与12位立即相加，然后符号拓展到64位寄存器rd<br>C语言实现：rd &#x3D; (int64_t)((int32_t)rs1 + imm);</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">addiw	s3,a0,-2。 &#x2F;&#x2F; 32位寄存器a0的值-2之后存储到64位寄存器s3中<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="8">
+<li>slli</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">slli rd, rs1, shamt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>把 rs1 的值逻辑左移 shamt 位，然后存入 rd。寄存器值左移固定位数，低位补0。常用于乘以2的幂或计算偏移地址<br>C语言实现：rd &#x3D; rs1 &lt;&lt; shamt;</p>
+<ol start="9">
+<li>jal</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">jal rd, label<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>jal &#x3D; Jump And Link<br>跳转到label地址,把下一条指令地址（PC+4）保存到 rd<br>等价C语言实现</p>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">rd &#x3D; PC + 4;   &#x2F;&#x2F; 保存返回地址
+PC &#x3D; label;    &#x2F;&#x2F; 跳转<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="10">
+<li>ld</li>
+</ol>
+<pre class="line-numbers language-asm" data-language="asm"><code class="language-asm">ld rd, offset(rs1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Load Doubleword, 从内存读取8个字节（64位）到寄存器rd。内存地址 &#x3D; rs1 + offset</p>
+</article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/31/MIT6-1810-2025-lab-Traps/" title="MIT6.1810(2025)-lab-Traps"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">MIT6.1810(2025)-lab-Traps</div></div><div class="info-2"><div class="info-item-1">Lab: traps首先需要下载代码并且切换到特定分支 git clone git:&#x2F;&#x2F;g.csail.mit.edu&#x2F;xv6-labs-2025 git fetch git checkout traps  RISC-V assembly (easy)这个实验的主要任务是读汇编文件call.asm并且回答一些问题。首先使用命令make fs.img 编译生成call.asm。相关代码如下  int g(int x) &#123;    0:	1141                	addi	sp,sp,-16    2:	e422                	sd	s0,8(sp)    4:	0800                	addi	s0,sp,16   return x+3; &#125;    6:	250d                	addiw	a0,a0,3    8:	6422                	ld	s0,8(sp)    a:	0141                	addi	sp,sp,16  ...</div></div></div></a><a class="pagination-related" href="/2025/11/23/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-hazard-pointer%E5%8E%9F%E6%96%87%E9%98%85%E8%AF%BB%E4%BB%A5%E5%8F%8A%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="无锁编程技术:hazard pointer原文阅读以及代码实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">无锁编程技术:hazard pointer原文阅读以及代码实现</div></div><div class="info-2"><div class="info-item-1">BG之前公司要对老旧的代码进行优化，因为某些请求-回应的延迟太大实在是看不下去了(不是因为甩锅没有甩过别的团队)。经过分析，发现部分串行的数据流从业务角度可以优化为并行+串行的模式。并行场景下保护数据安全最简单的方案就是对可能存在多线程(协程)竞争的资源加个互斥锁。但是加锁也有加锁的弊端。如果操作的时间过长,线程阻塞的情况会比较严重，延迟比较大。通过查阅相关资料得知有一些无锁编程技术可以有效避免互斥锁的缺陷。经过几次三番与公司架子师的battle，最后选择hazard pointer作为解决方案。鉴于网络上的资料良莠不齐，AI的回答又似是而非，不得不根据最原始的技术论文完成代码实现。 Paper原文下载链接(需要科学上网): google scholar备份: hazard_pointer.pdf Introduction文章提出了一个可以用于动态锁自由对象(dynamic lock-free objects)、允许任意内存重用、并且不需要特殊操作系统或硬件支持的锁自由内存管理方法。这种方法具有以下特性:  无等待(wait-free) 对数级别的争用敏感性(contention...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jensen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/31/MIT6-1810-2025-lab-Traps/" title="MIT6.1810(2025)-lab-Traps">MIT6.1810(2025)-lab-Traps</a><time datetime="2026-01-31T07:43:13.000Z" title="发表于 2026-01-31 15:43:13">2026-01-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/29/xv6%E5%B8%B8%E8%A7%81%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" title="risc-v常见汇编指令">risc-v常见汇编指令</a><time datetime="2026-01-29T13:46:11.000Z" title="发表于 2026-01-29 21:46:11">2026-01-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/23/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-hazard-pointer%E5%8E%9F%E6%96%87%E9%98%85%E8%AF%BB%E4%BB%A5%E5%8F%8A%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="无锁编程技术:hazard pointer原文阅读以及代码实现">无锁编程技术:hazard pointer原文阅读以及代码实现</a><time datetime="2025-11-23T05:47:06.000Z" title="发表于 2025-11-23 13:47:06">2025-11-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/22/%E4%B8%BB%E9%A1%B5/" title="主页">主页</a><time datetime="2025-11-22T11:23:33.000Z" title="发表于 2025-11-22 19:23:33">2025-11-22</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jensen</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
