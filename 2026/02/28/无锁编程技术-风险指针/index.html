@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://devils1741.github.io/img/butterfly-icon.png">
 <meta property="article:published_time" content="2026-02-28T09:35:01.000Z">
-<meta property="article:modified_time" content="2026-02-28T14:21:06.180Z">
+<meta property="article:modified_time" content="2026-03-01T13:18:25.503Z">
 <meta property="article:author" content="Jensen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://devils1741.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
@@ -17,7 +17,7 @@
   "url": "https://devils1741.github.io/2026/02/28/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-%E9%A3%8E%E9%99%A9%E6%8C%87%E9%92%88/",
   "image": "https://devils1741.github.io/img/butterfly-icon.png",
   "datePublished": "2026-02-28T09:35:01.000Z",
-  "dateModified": "2026-02-28T14:21:06.180Z",
+  "dateModified": "2026-03-01T13:18:25.503Z",
   "author": [
     {
       "@type": "Person",
@@ -163,7 +163,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="/css/prism.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">无锁编程技术--风险指针</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">无锁编程技术--风险指针</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-28T09:35:01.000Z" title="发表于 2026-02-28 17:35:01">2026-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-28T14:21:06.180Z" title="更新于 2026-02-28 22:21:06">2026-02-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在并发编程中，主要问题可以分为三类：正确性问题、线程同步问题和性能问题。<br>正确性问题，比如竞态条件、内存可见性和指令重排，这些会导致数据不一致。<br>线程同步问题，比如死锁以及条件变量中的丢失唤醒，需要通过合理的锁顺序和条件检查来避免。<br>性能问题，比如锁竞争，在高并发下可能成为瓶颈。<br>在高并发场景下，我们可以使用atomic + memory ordering构建lock-free结构，从而减少锁竞争，提高性能。<br>在无GC(垃圾回收机制)的语言中，使用lock-free的结构还有一个问题就是内存回收。因为lock-free的结构线程不会被阻塞，无法知道谁在访问某个内存，因此不能随意free内存。<br>为了解决这个问题，Maged M提出了无锁编程技术–风险指针(Hazard Pointers, HP)<br>这种思路其实很直白：线程在访问共享对象前先声明自己正在使用它，从而阻止其他线程提前释放该对象。在线程释放节点后，该节点也不会立即被回收而是存储到回收队列中，回收队列定期检查存储的节点，没有线程使用的节点就会被释放</p>
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">无锁编程技术--风险指针</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">无锁编程技术--风险指针</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-28T09:35:01.000Z" title="发表于 2026-02-28 17:35:01">2026-02-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-01T13:18:25.503Z" title="更新于 2026-03-01 21:18:25">2026-03-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在并发编程中，主要问题可以分为三类：正确性问题、线程同步问题和性能问题。<br>正确性问题，比如竞态条件、内存可见性和指令重排，这些会导致数据不一致。<br>线程同步问题，比如死锁以及条件变量中的丢失唤醒，需要通过合理的锁顺序和条件检查来避免。<br>性能问题，比如锁竞争，在高并发下可能成为瓶颈。<br>在高并发场景下，我们可以使用atomic + memory ordering构建lock-free结构，从而减少锁竞争，提高性能。<br>在无GC(垃圾回收机制)的语言中，使用lock-free的结构还有一个问题就是内存回收。因为lock-free的结构线程不会被阻塞，无法知道谁在访问某个内存，因此不能随意free内存。<br>为了解决这个问题，Maged M提出了无锁编程技术–风险指针(Hazard Pointers, HP)<br>这种思路其实很直白：线程在访问共享对象前先声明自己正在使用它，从而阻止其他线程提前释放该对象。在线程释放节点后，该节点也不会立即被回收而是存储到回收队列中，回收队列定期检查存储的节点，没有线程使用的节点就会被释放</p>
 <h1 id="核心数据结构与算法"><a href="#核心数据结构与算法" class="headerlink" title="核心数据结构与算法"></a>核心数据结构与算法</h1><h2 id="HPRecType"><a href="#HPRecType" class="headerlink" title="HPRecType"></a>HPRecType</h2><p>每个线程使用结构体HPRecType记录正在访问的内存，所有线程的HPRecType构成一个链表。<br>同时每个线程都有自己的垃圾回收队列rlist，</p>
 <pre class="line-numbers language-C" data-language="C"><code class="language-C">&#x2F;&#x2F; Hazard pointer record structure
 struct HPRecType &#123;
@@ -225,7 +225,7 @@ Scan(head: *HPRecType) &#123;
     plist.free();
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h1><p>作者以无锁FIFO（Michael &amp; Scott Lock-Free Queue (1996)）为例描述如何将HP插入到现有的无锁队列中.<br>首先是队列的入队和出队<br>初始版本的伪代码</p>
+<h1 id="伪代码描述"><a href="#伪代码描述" class="headerlink" title="伪代码描述"></a>伪代码描述</h1><p>作者以无锁FIFO（Michael &amp; Scott Lock-Free Queue (1996)）为例描述如何将HP插入到现有的无锁队列中.<br>首先是队列的入队和出队<br>初始版本的伪代码</p>
 <pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">&#x2F;&#x2F; Node structure
 structure NodeType &#123;
     Data : DataType;
@@ -297,8 +297,8 @@ Enqueue(data : DataType) &#123;
     &#x2F;&#x2F; 返回取出的数据
     return data;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>加入HP之后的伪代码</p>
-<pre class="line-numbers language-C" data-language="C"><code class="language-C">&#x2F;&#x2F; hp0 和 hp1 是线程私有的风险指针 (Hazard Pointers)
+<p>加入HP之后的伪代码，改动其实也很简单就是把需要访问的节点用HP保护起来。<br>但是这里有个坑爹的地方，入队列的时候伪代码里写的是<code>h ← Tail; *hp0 ← h;</code>。这代表着先获尾节点快照，然后加入HP，实际上这是错误的，应该首先加入HP保护，在获取头节点。原因是如果先获取头节点，在头节点被保护之前，就可能失效了。<br>后续tail-&gt;next必定error.</p>
+<pre class="line-numbers language-C" data-language="C"><code class="language-C">&#x2F;&#x2F; hp0 和 hp1 是线程私有的风险指针(HP)
 Enqueue(data: DataType) &#123;
     node ← NewNode();
     node-&gt;Data ← data;
@@ -307,17 +307,100 @@ Enqueue(data: DataType) &#123;
         t ← Tail;
         *hp0 ← t;                     &#x2F;&#x2F; 标记 t 为正在使用，防止被释放
         if (Tail ≠ t) continue;       &#x2F;&#x2F; 验证风险指针标记的是否还是最新的 Tail
-
         next ← t-&gt;Next;
         if (Tail ≠ t) continue;
-
         if (next ≠ null) &#123;            &#x2F;&#x2F; 发现 Tail 滞后，帮助推进
             CAS(&amp;Tail, t, next);
             continue;
         &#125;
-
         if CAS(&amp;t-&gt;Next, null, node)  &#x2F;&#x2F; 尝试挂载新节点
             break;
     &#125;
     CAS(&amp;Tail, t, node);              &#x2F;&#x2F; 尝试将 Tail 移动到新节点
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jensen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">核心数据结构与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HPRecType"><span class="toc-number">2.1.</span> <span class="toc-text">HPRecType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RetireNode-routine"><span class="toc-number">2.2.</span> <span class="toc-text">RetireNode routine</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">应用实例</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/28/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-%E9%A3%8E%E9%99%A9%E6%8C%87%E9%92%88/" title="无锁编程技术--风险指针">无锁编程技术--风险指针</a><time datetime="2026-02-28T09:35:01.000Z" title="发表于 2026-02-28 17:35:01">2026-02-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jensen</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+&#125;
+
+
+Dequeue() : DataType
+&#123;
+    while (true) &#123;
+
+        &#x2F;&#x2F; 读取当前 Head（dummy 节点）
+        h ← Head;
+
+        &#x2F;&#x2F; HP0 保护 h
+        &#x2F;&#x2F; 告诉系统：当前线程正在访问 h
+        &#x2F;&#x2F; 在 hp0 清空之前，任何线程都不能释放 h
+        *hp0 ← h;
+
+        &#x2F;&#x2F; 再次确认 Head 没变化
+        &#x2F;&#x2F; 因为在设置 hazard pointer 之前
+        &#x2F;&#x2F; Head 可能已经被别的线程推进
+        if (Head ≠ h)
+            continue;
+
+        t ← Tail;
+        next ← h-&gt;Next;
+ 
+        &#x2F;&#x2F; HP1 保护 next
+        &#x2F;&#x2F; 防止 next 在我们读取 data 前被释放
+        *hp1 ← next;
+
+        &#x2F;&#x2F; 再检查一次 Head 是否变化
+        &#x2F;&#x2F; 如果变化，说明 next 可能已经无效
+        if (Head ≠ h)
+            continue;
+        &#x2F;&#x2F; 队列为空
+        if (next &#x3D;&#x3D; null)
+            return EMPTY;
+        &#x2F;&#x2F; Tail 落后情况（enqueue 未完成）
+        &#x2F;&#x2F; 当前线程帮忙推进Tai
+        if (h &#x3D;&#x3D; t) &#123;
+            CAS(&amp;Tail, t, next);
+            continue;
+        &#125;
+        &#x2F;&#x2F; 读取数据
+        &#x2F;&#x2F; 现在 next 被 hp1 保护，可以安全访问
+        data ← next-&gt;Data;
+        &#x2F;&#x2F; 尝试推进 Head
+        &#x2F;&#x2F; 谁 CAS 成功谁 dequeue 成功
+        if (CAS(&amp;Head, h, next))
+            break;
+    &#125;
+    &#x2F;&#x2F; 不直接释放内存
+    &#x2F;&#x2F; 因为其他线程可能仍持有 hp0&#x3D;h
+    RetireNode(h);
+
+    return data;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>因为该算法适用于无GC的语言，因此只能选择C&#x2F;C++&#x2F;Rust进行实践。原文描述了多种数据结构的HP实现，这里选择最常用的队列完成对论文的复现。 完整代码:<a target="_blank" rel="noopener" href="https://github.com/devils1741/code-of-blogs/blob/master/hazard-pointer/main.cpp">pronhub</a><br>基于HP的lock-free的队列主要有三种数据结构</p>
+<ol>
+<li>无锁队列–存储业务数据</li>
+<li>HP表–访问保护表</li>
+<li>回收队列–延迟回收链表</li>
+</ol>
+<h2 id="无锁队列"><a href="#无锁队列" class="headerlink" title="无锁队列"></a>无锁队列</h2><p>无锁队列基于 Michael &amp; Scott FIFO 队列，底层是一个带 dummy 节点的单向链表，通过两个原子指针维护：<br>head：指向 dummy（真实数据在 head-&gt;next）<br>tail：指向队尾附近（允许短暂落后）<br>节点结构非常简单：</p>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">template&lt;typename T&gt;
+struct Node &#123;
+    std::atomic&lt;Node*&gt; next;
+    T data;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="HP表"><a href="#HP表" class="headerlink" title="HP表"></a>HP表</h2><p>HP表是一个全局数组，记录所有线程当前正在访问的节点。</p>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">struct HazardPointer &#123;
+    std::atomic&lt;std::thread::id&gt; owner;
+    std::atomic&lt;void*&gt; ptr;
+&#125;;
+
+HazardPointer g_hps[MAX_HP];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>每个线程会占用少量 slot（通常2个）：</p>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">ThreadHP &#123;
+    hp0; &#x2F;&#x2F; protect head&#x2F;tail
+    hp1; &#x2F;&#x2F; protect next
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="回收队列"><a href="#回收队列" class="headerlink" title="回收队列"></a>回收队列</h2><p>普通的队列，可以直接使用STL中的queue。当节点从队列移除后，不能直接 delete，而是进入回收队列。回收队列每个线程私有。达到阈值时会扫描队列中的数据无线程使用的就会被释放。</p>
+<h3 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h3><p>简单测试了一下MPMC队列在高并发下的吞吐量和正确性。<br>消费者32+生产者32的条件下，性能提升显著。<br>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Mutex Queue &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>Time(ms): 11447.338<br>Throughput ops&#x2F;sec: 5590819.618<br>Produced: 32000000  Consumed: 32000000<br>Sum(prod): 512000016000000  Sum(cons): 512000016000000  [OK]</p>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; HP LockFree Queue &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>Time(ms): 9516.234<br>Throughput ops&#x2F;sec: 6725349.221<br>Produced: 32000000  Consumed: 32000000<br>Sum(prod): 512000016000000  Sum(cons): 512000016000000  [OK]</p>
+<p>但是到了消费者2+生产者2的情况，性能就没有优势了，个人推测是因为锁的切换开销小于了scan的开销。<br>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Mutex Queue &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>Time(ms): 442.884<br>Throughput ops&#x2F;sec: 9031714.577<br>Produced: 2000000  Consumed: 2000000<br>Sum(prod): 2000001000000  Sum(cons): 2000001000000  [OK]</p>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; HP LockFree Queue &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;<br>Time(ms): 482.273<br>Throughput ops&#x2F;sec: 8294049.639<br>Produced: 2000000  Consumed: 2000000<br>Sum(prod): 2000001000000  Sum(cons): 2000001000000  [OK]</p>
+</article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jensen</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">核心数据结构与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HPRecType"><span class="toc-number">2.1.</span> <span class="toc-text">HPRecType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RetireNode-routine"><span class="toc-number">2.2.</span> <span class="toc-text">RetireNode routine</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E6%8F%8F%E8%BF%B0"><span class="toc-number">3.</span> <span class="toc-text">伪代码描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E9%94%81%E9%98%9F%E5%88%97"><span class="toc-number">4.1.</span> <span class="toc-text">无锁队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HP%E8%A1%A8"><span class="toc-number">4.2.</span> <span class="toc-text">HP表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%94%B6%E9%98%9F%E5%88%97"><span class="toc-number">4.3.</span> <span class="toc-text">回收队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94"><span class="toc-number">4.3.1.</span> <span class="toc-text">性能对比</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/28/%E6%97%A0%E9%94%81%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF-%E9%A3%8E%E9%99%A9%E6%8C%87%E9%92%88/" title="无锁编程技术--风险指针">无锁编程技术--风险指针</a><time datetime="2026-02-28T09:35:01.000Z" title="发表于 2026-02-28 17:35:01">2026-02-28</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jensen</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3"></script><script src="/js/main.js?v=5.5.3"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
